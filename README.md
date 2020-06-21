@@ -212,3 +212,10 @@ Get admin token
 ```
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 ```
+
+
+Add the following to the deployment of k8s-dashboard-kubernetes-dashboard in the dashboard :D
+```
+- --enable-skip-login
+- --disable-settings-authorizer  
+```
