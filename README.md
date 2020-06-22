@@ -40,6 +40,7 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
 sudo apt-get install -y kubectl
+kubectl version --client
 ````
 
 # 3. Install minikube for linux (optional for windows and mac)
@@ -57,7 +58,7 @@ minikube status
 # 4. Docker Hello world
 
 ```
-docker run -d -p 80:80 tutum/hello-world
+docker run -d -p 8080:80 tutum/hello-world
 docker ps
 ```
 
