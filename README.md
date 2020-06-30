@@ -95,11 +95,11 @@ Update image
 
 ```
 kubectl set image deployment/hello-k8s hello-world=nginxdemos/hello
-rollout history deploy/hello-k8s
+kubectl rollout history deploy/hello-k8s
 
 curl localhost:80
 
-dojo-k8s kubectl rollout undo deploy/hello-k8s
+kubectl rollout undo deploy/hello-k8s
 ```
 
 Manually scale up instances
