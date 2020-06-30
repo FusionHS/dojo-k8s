@@ -1,7 +1,6 @@
 # 1. Install Docker
 
 ## Windows
-
 Install Docker Desktop from https://www.docker.com/products/docker-desktop
 
 ## Mac
@@ -11,6 +10,14 @@ Install Docker Desktop from https://www.docker.com/products/docker-desktop
 ## Linux
 
 Install Docker from your package manager following https://docs.docker.com/engine/install/ubuntu/
+
+```
+sudo groupadd docker 
+
+sudo usermod -aG docker $USER
+```
+
+And restart your session
 
 # 2. Install Kubectl
 
@@ -50,7 +57,7 @@ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/miniku
   && chmod +x minikube
 sudo mkdir -p /usr/local/bin/
 sudo install minikube /usr/local/bin/
-minikube start --driver=none
+minikube start --driver=docker
 minikube status
 ```
 
@@ -95,11 +102,11 @@ Update image
 
 ```
 kubectl set image deployment/hello-k8s hello-world=nginxdemos/hello
-rollout history deploy/hello-k8s
+kubectl rollout history deploy/hello-k8s
 
 curl localhost:80
 
-dojo-k8s kubectl rollout undo deploy/hello-k8s
+kubectl rollout undo deploy/hello-k8s
 ```
 
 Manually scale up instances
@@ -122,8 +129,8 @@ kubectl delete deployment hello-k8s
 https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/
 
 ```
-kubectl apply -f 6_api-objects/hello-k8s-deployment.yaml
-kubectl apply -f 6_api-objects/hello-k8s-svc.yaml
+kubectl apply -f 6-api-objects/hello-k8s-deployment.yaml
+kubectl apply -f 6-api-objects/hello-k8s-svc.yaml
 ```
 
 inspect
@@ -210,8 +217,16 @@ browse to https://localhost
 
 Get admin token
 
+## Linux
 ```
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+```
+
+## Windows
+
+```
+kubectl -n kube-system get secret
+kubectl -n kube-system describe secret admin-user-****-****
 ```
 
 
